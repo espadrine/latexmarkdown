@@ -1,0 +1,35 @@
+{
+  "name": "academarkdown",
+  "version": "0.1.0",
+  "description": "Write scholarly articles in a Markdown format for Web publication.",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint '*.js'",
+    "test": "mocha src 'test/*.js'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/espadrine/academarkdown.git"
+  },
+  "keywords": [
+    "markdown",
+    "scholar",
+    "academic",
+    "paper",
+    "latex"
+  ],
+  "author": "Thaddée Tyl",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/espadrine/academarkdown/issues"
+  },
+  "homepage": "https://github.com/espadrine/academarkdown#readme",
+  "devDependencies": {
+    "eslint": "^7.17.0",
+    "mocha": "^8.2.1"
+  },
+  "dependencies": {
+    "commonmark": "^0.29.3",
+    "katex": "^0.12.0"
+  }
+}
