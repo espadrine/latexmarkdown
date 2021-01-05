@@ -1,5 +1,5 @@
 {
-  "name": "academarkdown",
+  "name": "latexmarkdown",
   "version": "0.1.0",
   "description": "Write scholarly articles in a Markdown format for Web publication.",
   "main": "index.js",

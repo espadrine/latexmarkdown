@@ -1,0 +1,7 @@
+#!/usr/bin/env node
+const fs = require('fs');
+const academarkdown = require('..');
+
+const input = fs.readFileSync(0, 'utf8');
+const output = academarkdown.renderHTMLDoc(input);
+fs.writeFileSync(1, output);
