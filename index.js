@@ -11,14 +11,32 @@ function latexPass(ast) {
   let event, node;
   while ((event = walker.next())) {
     node = event.node;
-    if (event.entering && node.type === 'code_block' && node.info === 'latex') {
-      const html = katex.renderToString(node.literal, {
-        throwOnError: false,
-        displayMode: true,
-      });
-      const newNode = cmParser.parse(html);
-      node.insertBefore(newNode);
-      node.unlink();
+
+    if (event.entering) {
+      // LaTeX blocks.
+      if (node.type === 'code_block' && node.info === 'latex') {
+        const html = katex.renderToString(node.literal, {
+          throwOnError: false,
+          displayMode: true,
+        });
+        const newNode = cmParser.parse(html);
+        node.insertBefore(newNode);
+        node.unlink();
+      }
+
+      // Inline LaTeX.
+      else if (node.type === 'code' && node.literal.startsWith('$$')) {
+        // Remove the $$ with slice().
+        let latex = node.literal.slice(2);
+        if (latex.slice(-2) === '$$') { latex = latex.slice(0, -2); }
+        const html = katex.renderToString(latex, {
+          throwOnError: false,
+        });
+        const newNode = new commonmark.Node('html_inline', node.sourcepos);
+        newNode.literal = html;
+        node.insertBefore(newNode);
+        node.unlink();
+      }
     }
   }
   return ast;

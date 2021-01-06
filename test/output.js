@@ -10,8 +10,8 @@ function validate(filename) {
   const expOutput = String(fs.readFileSync(outf));
   it('should handle ' + filename.replace(/-/g, ' '), function() {
     const genOutput = academarkdown.renderHTMLDoc(expInput);
-    assert.equal(genOutput, expOutput);
     //fs.writeFileSync(outf, genOutput);
+    assert.equal(genOutput, expOutput);
   });
 }
 
