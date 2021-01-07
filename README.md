@@ -2,7 +2,7 @@
 
 Write academic publications in Markdown with LaTeX interspersed:
 
-    We can therefore derive that the values $$x \in \mathbb{R}$$
+    We can derive that the values `$$x \in \mathbb{R}`
     that are in range, follow the equation:
 
     ```latex

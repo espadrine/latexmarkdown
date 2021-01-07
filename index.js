@@ -19,7 +19,8 @@ function latexPass(ast) {
           throwOnError: false,
           displayMode: true,
         });
-        const newNode = cmParser.parse(html);
+        const newNode = new commonmark.Node('html_block', node.sourcepos);
+        newNode.literal = html;
         node.insertBefore(newNode);
         node.unlink();
       }
