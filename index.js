@@ -26,9 +26,12 @@ function latexPass(ast) {
       }
 
       // Inline LaTeX.
-      else if (node.type === 'code' && node.literal.startsWith('$$')) {
-        // Remove the $$ with slice().
-        let latex = node.literal.slice(2);
+      else if (node.type === 'code' && (
+          node.literal.startsWith('$$') ||
+          node.literal.startsWith('latex:'))) {
+        const prefix = node.literal.startsWith('$$')? '$$': 'latex:';
+        // Remove the $$ prefix with slice().
+        let latex = node.literal.slice(prefix.length);
         if (latex.slice(-2) === '$$') { latex = latex.slice(0, -2); }
         const html = katex.renderToString(latex, {
           throwOnError: false,

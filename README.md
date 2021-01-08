@@ -18,6 +18,19 @@ $ <paper.md latexmarkdown >paper.html
 From there, you may open it in a Web browser, and either print it,
 or convert it to PDF, if you are interested in such inferior formats.
 
+## Format
+
+### LaTeX
+
+Inline: with ``` `$$x` ``` or ``` `$$x$$` ``` `latex: x` ```
+(where `x` is the LaTeX content).
+
+Block: using fenced code.
+
+    ```latex
+    x
+    ```
+
 ## Installation
 
 First, you need to have Node.js installed.
