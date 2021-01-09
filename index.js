@@ -62,6 +62,6 @@ module.exports.renderHTMLDoc = function(input) {
     + '</head>\n'
     + '<body>\n'
     + content
-    + '</body>\n'
+    + '</body>\n';
   return html;
 };

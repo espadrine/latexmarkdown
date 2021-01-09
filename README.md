@@ -38,3 +38,18 @@ First, you need to have Node.js installed.
 Then, all you need to do is:
 
     npm install -g latexmarkdown
+
+## CLI
+
+- `stdin` is a LaTeXMarkdown file to convert.
+- `stdout` is a generated HTML file.
+- `--body` generates only the body (which excludes CSS linking).
+  That can be used to serve your own, concatenated CSS.
+
+## Plans
+
+- Syntax highlight
+- References / Bibliography
+- Link to sections / images / tables
+- Footnotes? (Maybe as sidenotes?)
+- Tables (can technically already be done in raw HTML)

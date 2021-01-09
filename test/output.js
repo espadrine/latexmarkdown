@@ -15,6 +15,6 @@ function validate(filename) {
   });
 }
 
-describe('renderHTML', function() {
+describe('renderHTML', () => {
   validate('latex-block');
 });
