@@ -1,0 +1,9 @@
+Usage: latexmarkdown [-h] [options] <paper.md >paper.html
+
+stdin: is a LaTeXMarkdown file to convert.
+stdout: is a generated HTML file.
+
+Options:
+  --body: generates only the body (which excludes CSS linking).
+          That can be used to serve your own, concatenated CSS.
+
