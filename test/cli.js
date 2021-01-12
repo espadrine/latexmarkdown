@@ -1,40 +1,38 @@
 const assert = require('assert');
-const { execFile } = require('child_process');
+const { join } = require('path');
+const { promisify } = require('util');
 const fs = require('fs');
-const path = require('path');
-
-// Execute the CLI with the given args.
-// Validates that it matches test/fixtures/cli/args
-function validateCLI(subject, args, stdin = '') {
-  it(subject, done => {
-    new Promise((resolve, reject) => {
-      const execf = path.join(__dirname, '..', 'bin', 'latexmarkdown');
-      const cli = execFile(execf, args, {}, (err, stdout, stderr) => {
-        if (err) { return reject(err); }
-        const actOut = stdout;
-        const actErr = stderr;
-        const filename = subject.replace(/[^a-zA-Z0-9-_.]/g, '');
-        const outf = path.join(__dirname, 'fixtures', 'cli', filename + '-stdout');
-        const errf = path.join(__dirname, 'fixtures', 'cli', filename + '-stderr');
-        const expOut = String(fs.readFileSync(outf));
-        const expErr = String(fs.readFileSync(errf));
-        //fs.writeFileSync(outf, actOut);
-        //fs.writeFileSync(errf, actErr);
-        if (actOut !== expOut) {
-          resolve(new Error(`Wrong stdout: ` +
-            `expected\n${expOut}\nactual\n${actOut}`));
-        } else if (actErr !== expErr) {
-          resolve(new Error(`Wrong stderr: ` +
-            `expected\n${expErr}\nactual\n${actErr}`));
-        } else { resolve(); }
-      });
-      cli.stdin.end(stdin);
-    }).then(done).catch(done);
-  });
-}
+const cp = require('child_process');
+const [readFile, writeFile, execFile] =
+  [fs.readFile, fs.writeFile, cp.execFile]
+  .map(d => promisify(d));
 
 describe('CLI', () => {
   validateCLI('supports -h', ['-h']);
   validateCLI('supports simple document', [], 'test');
   validateCLI('supports --body', ['--body'], 'test');
 });
+
+// Execute the CLI with the given args.
+// Validates that it matches test/fixtures/cli/args
+function validateCLI(subject, args, stdin = '') {
+  it(subject, async () => {
+    const execf = join(__dirname, '..', 'bin', 'latexmarkdown');
+    const cliPromise = execFile(execf, args, {});
+    cliPromise.child.stdin.end(stdin);
+    const cli = await cliPromise;
+
+    const actOut = cli.stdout;
+    const actErr = cli.stderr;
+    const filename = subject.replace(/[^a-zA-Z0-9-_.]/g, '');
+    const outf = join(__dirname, 'fixtures', 'cli', filename + '-stdout');
+    const errf = join(__dirname, 'fixtures', 'cli', filename + '-stderr');
+    const expOut = String(await readFile(outf));
+    const expErr = String(await readFile(errf));
+    //writeFile(outf, actOut);
+    //writeFile(errf, actErr);
+
+    assert.equal(expOut, actOut);
+    assert.equal(expErr, actErr);
+  });
+}
