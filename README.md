@@ -22,7 +22,7 @@ or convert it to PDF, if you are interested in such inferior formats.
 
 ### LaTeX
 
-Inline: with ``` `$$x` ``` or ``` `$$x$$` ``` `latex: x` ```
+Inline: with ``` `$$x` ``` or ``` `$$x$$` ``` or ``` `latex: x` ```
 (where `x` is the LaTeX content).
 
 Block: using fenced code.
