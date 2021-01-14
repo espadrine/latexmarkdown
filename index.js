@@ -27,12 +27,14 @@ function latexPass(ast) {
 
       // Inline LaTeX.
       else if (node.type === 'code' && (
-          node.literal.startsWith('$$') ||
+          /^\$.*\$$/.test(node.literal) ||
           node.literal.startsWith('latex:'))) {
-        const prefix = node.literal.startsWith('$$')? '$$': 'latex:';
-        // Remove the $$ prefix with slice().
-        let latex = node.literal.slice(prefix.length);
-        if (latex.slice(-2) === '$$') { latex = latex.slice(0, -2); }
+        let latex = node.literal;
+        if (latex[0] === '$') {
+          latex = latex.slice(1, -1);
+        } else {
+          latex = latex.slice('latex:'.length);
+        }
         const html = katex.renderToString(latex, {
           throwOnError: false,
         });
