@@ -6,6 +6,8 @@ const cmParser = new commonmark.Parser({
 });
 const cmRenderer = new commonmark.HtmlRenderer();
 
+const inlineCodeModifier = /(latex|\$)$/;
+
 function latexPass(ast) {
   const walker = ast.walker();
   let event, node;
@@ -26,16 +28,11 @@ function latexPass(ast) {
       }
 
       // Inline LaTeX.
-      else if (node.type === 'code' && (
-          /^\$.*\$$/.test(node.literal) ||
-          node.literal.startsWith('latex:'))) {
-        let latex = node.literal;
-        if (latex[0] === '$') {
-          latex = latex.slice(1, -1);
-        } else {
-          latex = latex.slice('latex:'.length);
-        }
-        const html = katex.renderToString(latex, {
+      else if (node.type === 'code' && node.prev && node.prev.literal &&
+          inlineCodeModifier.test(node.prev.literal)) {
+        const modifier = inlineCodeModifier.exec(node.prev.literal);
+        node.prev.literal = node.prev.literal.slice(0, -modifier[0].length);
+        const html = katex.renderToString(node.literal, {
           throwOnError: false,
         });
         const newNode = new commonmark.Node('html_inline', node.sourcepos);

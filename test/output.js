@@ -7,7 +7,7 @@ const [readFile, writeFile] = [fs.readFile, fs.writeFile]
   .map(d => promisify(d));
 
 describe('renderHTML', () => {
-  validate('latex-block');
+  validate('latex');
 });
 
 // Convert LaTeXMarkdown from test/fixtures/<test>.md.
