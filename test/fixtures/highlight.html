@@ -1,0 +1,36 @@
+<!doctype html><meta charset="utf-8"><title></title>
+<head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.5.0/build/styles/default.min.css">
+</head>
+<body>
+<h1>Syntax highlighting</h1>
+<p>Example for Python:</p>
+<pre><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">factorial</span>(<span class="hljs-params">n</span>):</span>
+    <span class="hljs-keyword">if</span> n &lt; <span class="hljs-number">2</span>:
+        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>
+    <span class="hljs-keyword">else</span>:
+        <span class="hljs-keyword">return</span> n * factorial(n-<span class="hljs-number">1</span>)
+</pre>
+<p>Scheme:</p>
+<pre>(<span class="hljs-name"><span class="hljs-builtin-name">define</span></span> (<span class="hljs-name">factorial</span> n)
+  (<span class="hljs-name"><span class="hljs-builtin-name">let</span></span> loop ((<span class="hljs-name">cursor</span> n) (<span class="hljs-name">product</span> <span class="hljs-number">1</span>))
+    (<span class="hljs-name"><span class="hljs-builtin-name">if</span></span> (<span class="hljs-name"><span class="hljs-builtin-name">&lt;=</span></span> <span class="hljs-number">1</span> cursor)
+      product
+      (<span class="hljs-name">loop</span> (<span class="hljs-name">-1</span> cursor) (<span class="hljs-name"><span class="hljs-builtin-name">*</span></span> product cursor)))))
+</pre>
+<p>Swift:</p>
+<pre><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">factorial</span><span class="hljs-params">(<span class="hljs-keyword">_</span> n: Int)</span></span> -&gt; <span class="hljs-type">Int</span> {
+  <span class="hljs-keyword">return</span> (<span class="hljs-number">1</span><span class="hljs-operator">...</span><span class="hljs-built_in">max</span>(n, <span class="hljs-number">1</span>)).reduce(<span class="hljs-number">1</span>, <span class="hljs-operator">*</span>)
+}
+</pre>
+<p>Rakudo:</p>
+<pre><span class="hljs-function"><span class="hljs-keyword">sub</span> <span class="hljs-title">postfix</span>:&lt;!&gt;($<span class="hljs-title">n</span>: <span class="hljs-title">Int</span>) </span>{
+  <span class="hljs-keyword">return</span> [*] <span class="hljs-number">1</span> .. $n;
+}
+</pre>
+<p>Normal fence:</p>
+<pre><code>factorial 0 = 1
+factorial n = n * (factorial (n - 1))
+</code></pre>
+</body>

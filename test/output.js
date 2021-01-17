@@ -8,6 +8,7 @@ const [readFile, writeFile] = [fs.readFile, fs.writeFile]
 
 describe('renderHTML', () => {
   validate('latex');
+  validate('highlight');
 });
 
 // Convert LaTeXMarkdown from test/fixtures/<test>.md.

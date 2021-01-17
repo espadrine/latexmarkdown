@@ -1,5 +1,7 @@
 const commonmark = require('commonmark');
 const katex = require('katex');
+const hljs = require('highlight.js');
+const hljsLang = hljs.listLanguages();
 
 const cmParser = new commonmark.Parser({
   smart: true,
@@ -15,16 +17,26 @@ function latexPass(ast) {
     node = event.node;
 
     if (event.entering) {
-      // LaTeX blocks.
-      if (node.type === 'code_block' && node.info === 'latex') {
-        const html = katex.renderToString(node.literal, {
-          throwOnError: false,
-          displayMode: true,
-        });
-        const newNode = new commonmark.Node('html_block', node.sourcepos);
-        newNode.literal = html;
-        node.insertBefore(newNode);
-        node.unlink();
+      if (node.type === 'code_block') {
+        // LaTeX blocks.
+        if (node.info === 'latex') {
+          const html = katex.renderToString(node.literal, {
+            throwOnError: false,
+            displayMode: true,
+          });
+          const newNode = new commonmark.Node('html_block', node.sourcepos);
+          newNode.literal = html;
+          node.insertBefore(newNode);
+          node.unlink();
+
+        // Syntax highlighting.
+        } else if (hljsLang.includes(node.info)) {
+          const html = hljs.highlight(node.info, node.literal).value;
+          const newNode = new commonmark.Node('html_block', node.sourcepos);
+          newNode.literal = `<pre>${html}</pre>`;
+          node.insertBefore(newNode);
+          node.unlink();
+        }
       }
 
       // Inline LaTeX.
@@ -58,6 +70,7 @@ module.exports.renderHTMLDoc = function(input) {
   let html = '<!doctype html><meta charset="utf-8"><title></title>\n'
     + '<head>\n'
     + '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">\n'
+    + '<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.5.0/build/styles/default.min.css">\n'
     + '</head>\n'
     + '<body>\n'
     + content
