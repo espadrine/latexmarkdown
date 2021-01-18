@@ -8,7 +8,7 @@ const cmParser = new commonmark.Parser({
 });
 const cmRenderer = new commonmark.HtmlRenderer();
 
-const inlineCodeModifier = /(latex|\$)$/;
+const inlineCodeModifier = /([a-z0-9_]+|\$)$/;
 
 function latexPass(ast) {
   const walker = ast.walker();
@@ -39,18 +39,31 @@ function latexPass(ast) {
         }
       }
 
-      // Inline LaTeX.
+      // Inline code.
       else if (node.type === 'code' && node.prev && node.prev.literal &&
           inlineCodeModifier.test(node.prev.literal)) {
-        const modifier = inlineCodeModifier.exec(node.prev.literal);
-        node.prev.literal = node.prev.literal.slice(0, -modifier[0].length);
-        const html = katex.renderToString(node.literal, {
-          throwOnError: false,
-        });
-        const newNode = new commonmark.Node('html_inline', node.sourcepos);
-        newNode.literal = html;
-        node.insertBefore(newNode);
-        node.unlink();
+        const modifier = inlineCodeModifier.exec(node.prev.literal)[0];
+        let html;
+        // Inline LaTeX.
+        if (modifier === '$' || modifier === 'latex') {
+          html = katex.renderToString(node.literal, {
+            throwOnError: false,
+          });
+        // Inline code highlighting.
+        } else if (hljsLang.includes(modifier)) {
+          html = '<code>'
+            + hljs.highlight(modifier, node.literal).value
+            + '</code>';
+        }
+        if (html) {
+          node.prev.literal =
+            node.prev.literal.slice(0, -modifier.length);
+          const newNode =
+            new commonmark.Node('html_inline', node.sourcepos);
+          newNode.literal = html;
+          node.insertBefore(newNode);
+          node.unlink();
+        }
       }
     }
   }

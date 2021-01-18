@@ -1,5 +1,7 @@
 # Syntax highlighting
 
+## Blocks
+
 Example for Python:
 
 ```python
@@ -42,3 +44,8 @@ Normal fence:
 factorial 0 = 1
 factorial n = n * (factorial (n - 1))
 ```
+
+## Inline
+
+Also supported is rust`println!("inline code")`, not to be confused with
+the word rust `followed by code`.
