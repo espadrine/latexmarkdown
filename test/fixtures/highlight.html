@@ -16,7 +16,7 @@
 <p>Scheme:</p>
 <pre>(<span class="hljs-name"><span class="hljs-builtin-name">define</span></span> (<span class="hljs-name">factorial</span> n)
   (<span class="hljs-name"><span class="hljs-builtin-name">let</span></span> loop ((<span class="hljs-name">cursor</span> n) (<span class="hljs-name">product</span> <span class="hljs-number">1</span>))
-    (<span class="hljs-name"><span class="hljs-builtin-name">if</span></span> (<span class="hljs-name"><span class="hljs-builtin-name">&lt;=</span></span> <span class="hljs-number">1</span> cursor)
+    (<span class="hljs-name"><span class="hljs-builtin-name">if</span></span> (<span class="hljs-name"><span class="hljs-builtin-name">&lt;=</span></span> cursor <span class="hljs-number">1</span>)
       product
       (<span class="hljs-name">loop</span> (<span class="hljs-name">-1</span> cursor) (<span class="hljs-name"><span class="hljs-builtin-name">*</span></span> product cursor)))))
 </pre>
@@ -36,5 +36,5 @@ factorial n = n * (factorial (n - 1))
 </code></pre>
 <h2>Inline</h2>
 <p>Also supported is <code><span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;inline code&quot;</span>)</code>, not to be confused with
-the word rust <code>followed by code</code>.</p>
+the word rust <code>followed by code</code> (with a space in-between).</p>
 </body>

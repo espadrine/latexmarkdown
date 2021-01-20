@@ -17,7 +17,7 @@ Scheme:
 ```scheme
 (define (factorial n)
   (let loop ((cursor n) (product 1))
-    (if (<= 1 cursor)
+    (if (<= cursor 1)
       product
       (loop (-1 cursor) (* product cursor)))))
 ```
@@ -48,4 +48,4 @@ factorial n = n * (factorial (n - 1))
 ## Inline
 
 Also supported is rust`println!("inline code")`, not to be confused with
-the word rust `followed by code`.
+the word rust `followed by code` (with a space in-between).
