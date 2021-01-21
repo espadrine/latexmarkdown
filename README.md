@@ -34,6 +34,16 @@ place a U+200B Zero-Width Space `​` between them.
     x
     ```
 
+### Syntax highlighting
+
+**Block form** is the most common:
+
+    ```rust
+    println!("Hello, world!")
+    ```
+
+**Inline form**: with `` rust`println!("inline code")` ``.
+
 ## Installation
 
 First, you need to have Node.js installed.
@@ -51,7 +61,6 @@ Then, all you need to do is:
 
 ## Plans
 
-- Syntax highlight
 - References / Bibliography
 - Link to sections / images / tables
 - Footnotes? (Maybe as sidenotes?)
