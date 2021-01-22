@@ -1,8 +1,11 @@
 {
   "name": "latexmarkdown",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Write scholarly articles in a Markdown format for Web publication.",
   "main": "index.js",
+  "bin": {
+    "latexmarkdown": "./bin/latexmarkdown"
+  },
   "scripts": {
     "lint": "eslint '*.js'",
     "test": "mocha src 'test/*.js'"
