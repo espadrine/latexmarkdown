@@ -1,11 +1,29 @@
 <!doctype html><meta charset="utf-8"><title></title>
 <head>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.5.0/build/styles/default.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.5.0/build/styles/default.min.css">
+  <style>
+    h1 .autolink-clicker,
+    h2 .autolink-clicker,
+    h3 .autolink-clicker,
+    h4 .autolink-clicker,
+    h5 .autolink-clicker,
+    h6 .autolink-clicker {
+      visibility: hidden;
+    }
+    h1:hover .autolink-clicker,
+    h2:hover .autolink-clicker,
+    h3:hover .autolink-clicker,
+    h4:hover .autolink-clicker,
+    h5:hover .autolink-clicker,
+    h6:hover .autolink-clicker {
+      visibility: visible;
+    }
+  </style>
 </head>
 <body>
-<h1>Syntax highlighting</h1>
-<h2>Blocks</h2>
+<h1 id="Syntax_highlighting">Syntax highlighting <a href="#Syntax_highlighting" class="autolink-clicker" aria-hidden="true">§</a></h1>
+<h2 id="Blocks">Blocks <a href="#Blocks" class="autolink-clicker" aria-hidden="true">§</a></h2>
 <p>Example for Python:</p>
 <pre><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">factorial</span>(<span class="hljs-params">n</span>):</span>
     <span class="hljs-keyword">if</span> n &lt; <span class="hljs-number">2</span>:
@@ -34,7 +52,7 @@
 <pre><code>factorial 0 = 1
 factorial n = n * (factorial (n - 1))
 </code></pre>
-<h2>Inline</h2>
+<h2 id="Inline">Inline <a href="#Inline" class="autolink-clicker" aria-hidden="true">§</a></h2>
 <p>Also supported is <code><span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;inline code&quot;</span>)</code>, not to be confused with
 the word rust <code>followed by code</code> (with a space in-between).</p>
 </body>
