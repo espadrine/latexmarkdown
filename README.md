@@ -44,6 +44,21 @@ place a U+200B Zero-Width Space `​` between them.
 
 **Inline form**: with `` rust`println!("inline code")` ``.
 
+### Automatic links
+
+**Headings** automatically get linkable identifiers with a clickable link:
+
+    # Impact of war on the Lebanese electric grid
+
+…becomes:
+
+    <h1 id="impact-of-war-on-the-lebanese-electric-grid"
+      Impact of war on the Lebanese electric grid
+      <a href="#impact-of-war-on-the-lebanese-electric-grid">
+        §
+      </a>
+    </h1>
+
 ## Installation
 
 First, you need to have Node.js installed.
@@ -61,7 +76,8 @@ Then, all you need to do is:
 
 ## Plans
 
-- References / Bibliography
 - Link to sections / images / tables
+- References / Bibliography
 - Footnotes? (Maybe as sidenotes?)
+- Table of contents
 - Tables (can technically already be done in raw HTML)
