@@ -150,7 +150,11 @@ function idFromHeading(title, level) {
 }
 
 function genIdFromContent(content) {
-  return content.replace(/[^\p{L}\p{N}]+/ug, '_');
+  // Remove leading numerotation:
+  content = content.replace(/^[0-9\.\-]+[\.\-]\s*/, '');
+  // Remove non-printable characters:
+  content = content.replace(/[^\p{L}\p{N}]+/ug, '_');
+  return content;
 }
 
 // input: a String containing Markdown.
