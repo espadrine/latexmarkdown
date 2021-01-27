@@ -5,8 +5,7 @@ const commonmark = require('commonmark');
 const katex = require('katex');
 const hljs = require('highlight.js');
 const hljsLang = hljs.listLanguages();
-const { getChildren, cloneNode, debugNode, debugAST } =
-  require('./src/commonmark-helpers.js');
+const { getChildren, cloneNode } = require('./src/commonmark-helpers.js');
 
 const cmParser = new commonmark.Parser({
   smart: true,
@@ -151,7 +150,7 @@ function idFromHeading(title, level) {
 
 function genIdFromContent(content) {
   // Remove leading numerotation:
-  content = content.replace(/^[0-9\.\-]+[\.\-]\s*/, '');
+  content = content.replace(/^[0-9.-]+[.-]\s*/, '');
   // Remove non-printable characters:
   content = content.replace(/[^\p{L}\p{N}]+/ug, '_');
   return content;
@@ -198,7 +197,7 @@ function renderHTMLDoc(input) {
     + content
     + '</body>\n';
   return html;
-};
+}
 
 module.exports.renderHTML = renderHTML;
 module.exports.renderHTMLDoc = renderHTMLDoc;
