@@ -2,7 +2,7 @@
 
 Write academic publications in Markdown with LaTeX interspersed:
 
-    We can derive that the values `$$x \in \mathbb{R}`
+    We can derive that the values $`x \in \mathbb{R}`
     that are in range, follow the equation:
 
     ```latex
@@ -12,6 +12,7 @@ Write academic publications in Markdown with LaTeX interspersed:
 Get it compiled on the command line:
 
 ```bash
+$ npm install -g latexmarkdown
 $ <paper.md latexmarkdown >paper.html
 ```
 
