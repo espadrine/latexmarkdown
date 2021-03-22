@@ -1,6 +1,6 @@
 {
   "name": "latexmarkdown",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Write scholarly articles in a Markdown format for Web publication.",
   "main": "index.js",
   "bin": {
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/espadrine/academarkdown.git"
+    "url": "git+https://github.com/espadrine/latexmarkdown.git"
   },
   "keywords": [
     "markdown",
@@ -22,11 +22,11 @@
     "latex"
   ],
   "author": "Thaddée Tyl",
-  "license": "MIT",
+  "license": "EUPL-1.2",
   "bugs": {
-    "url": "https://github.com/espadrine/academarkdown/issues"
+    "url": "https://github.com/espadrine/latexmarkdown/issues"
   },
-  "homepage": "https://github.com/espadrine/academarkdown#readme",
+  "homepage": "https://github.com/espadrine/latexmarkdown#readme",
   "devDependencies": {
     "eslint": "^7.17.0",
     "mocha": "^8.2.1"
