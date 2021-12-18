@@ -1,16 +1,16 @@
 // Entry point for the latexmarkdown library.
 // It is relied upon by the ./bin/latexmarkdown executable.
 
-const commonmark = require('commonmark');
-const katex = require('katex');
-const hljs = require('highlight.js');
+import { Parser, HtmlRenderer, Node } from 'commonmark';
+import katex from 'katex';
+import hljs from 'highlight.js';
 const hljsLang = hljs.listLanguages();
-const { getChildren, cloneNode } = require('./src/commonmark-helpers.js');
+import { getChildren, cloneNode } from './src/commonmark-helpers.js';
 
-const cmParser = new commonmark.Parser({
+const cmParser = new Parser({
   smart: true,
 });
-const cmRenderer = new commonmark.HtmlRenderer();
+const cmRenderer = new HtmlRenderer();
 
 const inlineCodeModifier = /([a-z0-9_]+|\$)$/;
 
@@ -30,7 +30,7 @@ function latexPass(ast, options = {}) {
             throwOnError: false,
             displayMode: true,
           });
-          const newNode = new commonmark.Node('html_block', node.sourcepos);
+          const newNode = new Node('html_block', node.sourcepos);
           newNode.literal = html;
           node.insertBefore(newNode);
           node.unlink();
@@ -38,7 +38,7 @@ function latexPass(ast, options = {}) {
         // Syntax highlighting.
         } else if (hljsLang.includes(node.info)) {
           const html = hljs.highlight(node.info, node.literal).value;
-          const newNode = new commonmark.Node('html_block', node.sourcepos);
+          const newNode = new Node('html_block', node.sourcepos);
           newNode.literal = `<pre>${html}</pre>`;
           node.insertBefore(newNode);
           node.unlink();
@@ -65,7 +65,7 @@ function latexPass(ast, options = {}) {
           node.prev.literal =
             node.prev.literal.slice(0, -modifier.length);
           const newNode =
-            new commonmark.Node('html_inline', node.sourcepos);
+            new Node('html_inline', node.sourcepos);
           newNode.literal = html;
           node.insertBefore(newNode);
           node.unlink();
@@ -82,7 +82,7 @@ function latexPass(ast, options = {}) {
 
           // Get the HTML render of the heading.
           // We disable autolinks to avoid collision.
-          const contentNode = new commonmark.Node('document', node.sourcepos);
+          const contentNode = new Node('document', node.sourcepos);
           getChildren(node).map(cloneNode)
             .forEach(c => contentNode.appendChild(c));
           const subOptions = Object.assign({}, options);
@@ -91,7 +91,7 @@ function latexPass(ast, options = {}) {
 
           const level = node.level;
           const htmlID = idFromHeading(literal, level);
-          const newNode = new commonmark.Node('html_block', node.sourcepos);
+          const newNode = new Node('html_block', node.sourcepos);
           newNode.literal = `<h${level} id="${htmlID}">${html} `
             + `<a href="#${htmlID}" `
             +    `class="autolink-clicker" `
@@ -169,7 +169,7 @@ function renderHTMLFromAST(ast, options) {
 }
 
 function renderHTMLDoc(input) {
-  const content = module.exports.renderHTML(input);
+  const content = renderHTML(input);
   let html = '<!doctype html><meta charset="utf-8"><title></title>\n'
     + '<head>\n'
     + '  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">\n'
@@ -199,5 +199,7 @@ function renderHTMLDoc(input) {
   return html;
 }
 
-module.exports.renderHTML = renderHTML;
-module.exports.renderHTMLDoc = renderHTMLDoc;
+export default {
+  renderHTML: renderHTML,
+  renderHTMLDoc: renderHTMLDoc,
+};

@@ -1,10 +1,12 @@
-const assert = require('assert');
-const academarkdown = require('..');
-const { join } = require('path');
-const { promisify } = require('util');
-const fs = require('fs');
+import assert from 'assert/strict';
+import academarkdown from '../index.js';
+import { join, dirname } from 'path';
+import { fileURLToPath } from 'url';
+import { promisify } from 'util';
+import fs from 'fs';
 const [readFile, writeFile] = [fs.readFile, fs.writeFile]
   .map(d => promisify(d));
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 describe('renderHTML', () => {
   validate('latex');

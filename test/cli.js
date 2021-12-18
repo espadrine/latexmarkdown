@@ -1,11 +1,13 @@
-const assert = require('assert');
-const { join } = require('path');
-const { promisify } = require('util');
-const fs = require('fs');
-const cp = require('child_process');
+import assert from 'assert/strict';
+import { join, dirname } from 'path';
+import { fileURLToPath } from 'url';
+import { promisify } from 'util';
+import fs from 'fs';
+import cp from 'child_process';
 const [readFile, writeFile, execFile] =
   [fs.readFile, fs.writeFile, cp.execFile]
   .map(d => promisify(d));
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 describe('CLI', () => {
   validateCLI('supports -h', ['-h']);
@@ -17,8 +19,8 @@ describe('CLI', () => {
 // Validates that it matches test/fixtures/cli/args
 function validateCLI(subject, args, stdin = '') {
   it(subject, async () => {
-    const execf = join(__dirname, '..', 'bin', 'latexmarkdown');
-    const cliPromise = execFile(execf, args, {});
+    const execf = join(__dirname, '..', 'cli.js');
+    const cliPromise = execFile('node', [execf, ...args], {});
     cliPromise.child.stdin.end(stdin);
     const cli = await cliPromise;
 

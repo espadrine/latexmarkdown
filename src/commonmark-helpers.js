@@ -6,15 +6,13 @@ function getSiblings(node) {
   return [node].concat(node.next? getSiblings(node.next): []);
 }
 
-module.exports.getChildren =
-function getChildren(node) {
+export function getChildren(node) {
   return node.firstChild? getSiblings(node.firstChild): [];
 }
 
 // Construct an exact replica of the node’s subtree.
 // Warning: we clone the whole subtree, but not the parent or siblings.
-module.exports.cloneNode =
-function cloneNode(node) {
+export function cloneNode(node) {
   const clone = Object.assign(Object.create(Object.getPrototypeOf(node)), node);
   if (clone.firstChild) {
     clone._firstChild = cloneNode(clone.firstChild);
@@ -36,8 +34,7 @@ function cloneNode(node) {
 
 // 2. Debugging the commonmark.js library’s output.
 
-module.exports.debugNode =
-function debugNode(node) {
+export function debugNode(node) {
   return {
     type: node.type,
     literal: node.literal,
@@ -47,8 +44,7 @@ function debugNode(node) {
   };
 }
 
-module.exports.debugAST =
-function debugAST(node) {
+export function debugAST(node) {
   const getSiblings = n =>
     [n].concat(n.next? getSiblings(n.next): []);
   const getChildren = n =>
