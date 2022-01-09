@@ -1,6 +1,6 @@
 {
   "name": "latexmarkdown",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Write scholarly articles in a Markdown format for Web publication.",
   "type": "module",
   "main": "index.js",

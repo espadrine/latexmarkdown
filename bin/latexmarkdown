@@ -1,2 +1,1 @@
-#!/usr/bin/env bash
-node "${BASH_SOURCE%/*}"/../cli.js
+../cli.js
