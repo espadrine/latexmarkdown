@@ -37,7 +37,7 @@ function latexPass(ast, options = {}) {
 
         // Syntax highlighting.
         } else if (hljsLang.includes(node.info)) {
-          const html = hljs.highlight(node.info, node.literal).value;
+          const html = hljs.highlight(node.literal, { language: node.info }).value;
           const newNode = new Node('html_block', node.sourcepos);
           newNode.literal = `<pre>${html}</pre>`;
           node.insertBefore(newNode);
@@ -58,7 +58,7 @@ function latexPass(ast, options = {}) {
         // Inline code highlighting.
         } else if (hljsLang.includes(modifier)) {
           html = '<code>'
-            + hljs.highlight(modifier, node.literal).value
+            + hljs.highlight(node.literal, { language: modifier }).value
             + '</code>';
         }
         if (html) {
