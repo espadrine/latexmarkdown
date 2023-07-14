@@ -1,4 +1,4 @@
-import assert from 'assert/strict';
+import { strict as assert } from 'node:assert';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { promisify } from 'util';
@@ -19,7 +19,7 @@ describe('CLI', () => {
 // Validates that it matches test/fixtures/cli/args
 function validateCLI(subject, args, stdin = '') {
   it(subject, async () => {
-    const execf = join(__dirname, '..', 'cli.js');
+    const execf = join(__dirname, '..', 'bin', 'latexmarkdown.js');
     const cliPromise = execFile('node', [execf, ...args], {});
     cliPromise.child.stdin.end(stdin);
     const cli = await cliPromise;

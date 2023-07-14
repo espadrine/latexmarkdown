@@ -1,4 +1,4 @@
-import assert from 'assert/strict';
+import { strict as assert } from 'node:assert';
 import academarkdown from '../index.js';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';

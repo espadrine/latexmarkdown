@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 import fs from 'fs';
-import academarkdown from './index.js';
+import latexmarkdown from '../index.js';
 
 function main() {
   const options = parseOptions(process.argv.slice(2));
   const input = fs.readFileSync(0, 'utf8');
   const output = options.renderBodyOnly?
-    academarkdown.renderHTML(input):
-    academarkdown.renderHTMLDoc(input);
+    latexmarkdown.renderHTML(input):
+    latexmarkdown.renderHTMLDoc(input);
   fs.writeFileSync(1, output);
 }
 
