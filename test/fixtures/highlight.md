@@ -38,6 +38,15 @@ sub postfix:<!>($n: Int) {
 }
 ```
 
+LaTeX (now syntax-highlighted, not rendered as math):
+
+```latex
+\documentclass{article}
+\begin{document}
+Hello, world!
+\end{document}
+```
+
 Normal fence:
 
 ```

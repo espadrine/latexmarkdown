@@ -5,7 +5,7 @@ Write academic publications in Markdown with LaTeX interspersed:
     We can derive that the values $`x \in \mathbb{R}`
     that are in range, follow the equation:
 
-    ```latex
+    ```math
     \phi(x) \geq 1 - \sqrt[N]{1 - \gamma}
     ```
 
@@ -23,7 +23,7 @@ or convert it to PDF, if you are interested in such inferior formats.
 
 ### LaTeX
 
-**Inline**: with `` $`x` `` or `` latex`x` ``
+**Inline**: with `` $`x` `` or `` math`x` ``
 (where `x` is the LaTeX content).
 
 To actually print a visibly concatenated dollar sign with a code `x`,
@@ -31,7 +31,7 @@ place a U+200B Zero-Width Space `​` between them.
 
 **Block**: using fenced code.
 
-    ```latex
+    ```math
     x
     ```
 

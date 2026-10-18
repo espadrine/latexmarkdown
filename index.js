@@ -25,7 +25,7 @@ function latexPass(ast, options = {}) {
     if (event.entering) {
       if (node.type === 'code_block') {
         // LaTeX blocks.
-        if (node.info === 'latex') {
+        if (node.info === 'math') {
           const html = katex.renderToString(node.literal, {
             throwOnError: false,
             displayMode: true,
@@ -51,7 +51,7 @@ function latexPass(ast, options = {}) {
         const modifier = inlineCodeModifier.exec(node.prev.literal)[0];
         let html;
         // Inline LaTeX.
-        if (modifier === '$' || modifier === 'latex') {
+        if (modifier === '$' || modifier === 'math') {
           html = katex.renderToString(node.literal, {
             throwOnError: false,
           });
